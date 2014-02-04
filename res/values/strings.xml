@@ -3,6 +3,7 @@
 
     <string name="app_name">NFC Tracker</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">NFC Tracker app. </string>
+   <string name="tag_info">Loading NFC tag information.</string>
 
 </resources>
