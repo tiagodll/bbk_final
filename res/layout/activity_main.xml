@@ -9,8 +9,46 @@
     tools:context=".MainActivity" >
 
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
+    
+    
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="28dp"
+        android:text="@string/settings_text" />
+    
+    <RadioGroup
+        android:id="@+id/settings_persistence"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+	
+    <RadioButton
+        android:id="@+id/settings_handle_system"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:onClick="setPersistence"
+        android:checked="false"
+        android:text="@string/settings_handle_system" />
+
+    <RadioButton
+        android:id="@+id/settings_custom_handle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="setPersistence"
+        android:checked="false"
+        android:text="@string/settings_custom_handle" />
+    
+    </RadioGroup>
 
 </RelativeLayout>

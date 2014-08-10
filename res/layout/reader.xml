@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView2"
         android:layout_alignLeft="@+id/theText"
-        android:background="#000"
+        android:background="#ffffff"
         android:layout_below="@+id/theText" >
     </ListView>
 

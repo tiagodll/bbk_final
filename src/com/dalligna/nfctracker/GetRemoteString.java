@@ -46,13 +46,10 @@ public class GetRemoteString extends AsyncTask<String, Integer, String> {
 			try {
 				doFinish.invoke(null, args);
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     }

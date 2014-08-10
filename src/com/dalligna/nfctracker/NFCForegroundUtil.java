@@ -37,7 +37,6 @@ public NFCForegroundUtil(Activity activity) {
     intentFiltersArray = new IntentFilter[] { ndef };
 
     techListsArray = new String[][] { new String[] { NfcA.class.getName() } };
-    //techListsArray = new String[][] { new String[] { NfcA.class.getName(), NfcB.class.getName() }, new String[] {NfcV.class.getName()} };
 }
 
 public void enableForeground()
