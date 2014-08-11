@@ -131,7 +131,6 @@ public class Reader extends Activity {
 	
 	public void makeWebRequest(boolean write, View v)
 	{
-		EditText comment_box = (EditText)v.getRootView().findViewById(R.id.txtComment);
 		GetRemoteString getstring = new GetRemoteString(getApplicationContext(), getWindow().getDecorView());
 		try { getstring.setFinishMethod(Reader.class.getMethod("readNfcsFromWeb", new Class[] {String.class, Context.class, View.class})); } catch (NoSuchMethodException e) { e.printStackTrace(); }
 		getLocation();
@@ -140,12 +139,10 @@ public class Reader extends Activity {
 			url += "?type=nfc"
 				+ "&latitude=" + latitude
 				+ "&longitude=" + longitude
-				+ "&comment=" + URLEncoder.encode(comment_box.getText().toString());
+				+ "&comment=" + URLEncoder.encode(((EditText)v.getRootView().findViewById(R.id.txtComment)).getText().toString());
 		}else{
 			url += "?type=read";
 		}
-
-		//comment_box.clearComposingText();
 		getstring.execute(url);
 	}
 	
