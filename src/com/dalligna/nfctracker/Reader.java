@@ -2,9 +2,12 @@ package com.dalligna.nfctracker;
 
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -122,12 +125,13 @@ public class Reader extends Activity {
 
 		List<Tag> listContent = new HandleSystem().Retrieve(urlcontent);
 		
-		ArrayAdapter<Tag> adapter = new ArrayAdapter<Tag>(context, android.R.layout.simple_list_item_1, listContent);
+		ArrayAdapterTag adapter = new ArrayAdapterTag(context, R.layout.listview_tag, listContent);
 		((ListView)view.findViewById(R.id.historyView)).setAdapter(adapter);
 	}
 	
 	public void makeWebRequest(boolean write, View v)
 	{
+		EditText comment_box = (EditText)v.getRootView().findViewById(R.id.txtComment);
 		GetRemoteString getstring = new GetRemoteString(getApplicationContext(), getWindow().getDecorView());
 		try { getstring.setFinishMethod(Reader.class.getMethod("readNfcsFromWeb", new Class[] {String.class, Context.class, View.class})); } catch (NoSuchMethodException e) { e.printStackTrace(); }
 		getLocation();
@@ -136,10 +140,12 @@ public class Reader extends Activity {
 			url += "?type=nfc"
 				+ "&latitude=" + latitude
 				+ "&longitude=" + longitude
-				+ "&comment=" + URLEncoder.encode(((EditText)v.getRootView().findViewById(R.id.txtComment)).getText().toString());
+				+ "&comment=" + URLEncoder.encode(comment_box.getText().toString());
 		}else{
 			url += "?type=read";
 		}
+
+		//comment_box.clearComposingText();
 		getstring.execute(url);
 	}
 	
@@ -149,7 +155,7 @@ public class Reader extends Activity {
 		try {
 			json = new JSONObject(urlcontent);
 			strtag += "ID: " + json.get("id");
-			strtag += "type: " + json.get("type");
+			strtag += ", type: " + json.get("type");
 			((TextView)view.findViewById(R.id.theText)).setText(strtag);
 			
 			ArrayList<Tag> listContent = new ArrayList<Tag>();
@@ -161,7 +167,8 @@ public class Reader extends Activity {
 				listContent.add(new Tag(json.getString("id"), 1, h.getInt("time"), h.getString("latitude"), h.getString("longitude"), h.getString("comment")));
 			}
 			
-			ArrayAdapter<Tag> adapter = new ArrayAdapter<Tag>(context, android.R.layout.simple_list_item_1, listContent);
+			ArrayAdapterTag adapter = new ArrayAdapterTag(context, R.layout.listview_tag, listContent);
+			//ArrayAdapter<Tag> adapter = new ArrayAdapter<Tag>(context, android.R.layout.simple_list_item_1, listContent);
 			((ListView)view.findViewById(R.id.historyView)).setAdapter(adapter);
 			
 		} catch (JSONException e) {

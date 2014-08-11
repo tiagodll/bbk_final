@@ -1,5 +1,7 @@
 package com.dalligna.nfctracker;
 
+import java.util.Date;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,7 +14,7 @@ public class Tag {
 		this.handle_id = handle_id;
 		this.handle = handle;
 		this.timestamp = timestamp;
-		FromString(data); 
+		FromJson(data); 
 	}
 	public Tag(String handle, int handle_id, int timestamp, String latitude, String longitude, String comment){
 		this.handle_id = handle_id;
@@ -24,6 +26,11 @@ public class Tag {
 	}
 	
 	public String ToString(){
+		Date d = new Date(this.timestamp);
+		return d + " - lat:" + this.latitude + " long:" + this.longitude + " comment: " + this.comment;
+	}
+	
+	public String ToJson(){
 		JSONObject json = new JSONObject();
 		try {
 			json.put("latitude", latitude);
@@ -35,7 +42,7 @@ public class Tag {
 		return json.toString();
 	}
 	
-	public void FromString(String data){
+	public void FromJson(String data){
 		try {
 			JSONObject json = new JSONObject(data);
 			latitude = json.getString("latitude");
