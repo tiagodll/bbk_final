@@ -84,9 +84,8 @@ public class Reader extends Activity {
 	}
 	
 	public void handleIntent(Intent intent){
-		//tag = new String(intent.getByteArrayExtra(NfcAdapter.EXTRA_ID), Charset.forName("US-ASCII"));
 		byte[] extraid = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
-		tag = ByteArrayToHexString(extraid);
+		tag = Util.ByteArrayToHexString(extraid);
         
 		((TextView)getWindow().findViewById(R.id.theText)).setText(tag);
 		
@@ -94,21 +93,6 @@ public class Reader extends Activity {
 			makeWebRequest(false, null);
 		else
 			makeHandleRequest(false, null);
-	}
-	private String ByteArrayToHexString(byte [] inarray) {
-	    int i, j, in;
-	    String [] hex = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"};
-	    String out= "";
-	 
-	    for(j = 0 ; j < inarray.length ; ++j) 
-	        {
-	        in = (int) inarray[j] & 0xff;
-	        i = (in >> 4) & 0x0f;
-	        out += hex[i];
-	        i = in & 0x0f;
-	        out += hex[i];
-	        }
-	    return out;
 	}
 	
 	public void makeHandleRequest(boolean write, View v){
@@ -165,7 +149,6 @@ public class Reader extends Activity {
 			}
 			
 			ArrayAdapterTag adapter = new ArrayAdapterTag(context, R.layout.listview_tag, listContent);
-			//ArrayAdapter<Tag> adapter = new ArrayAdapter<Tag>(context, android.R.layout.simple_list_item_1, listContent);
 			((ListView)view.findViewById(R.id.historyView)).setAdapter(adapter);
 			
 		} catch (JSONException e) {
