@@ -51,4 +51,24 @@
     
     </RadioGroup>
 
+    <EditText
+        android:id="@+id/searchTagByIdText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_persistence"
+        android:ems="10"
+        android:inputType="text" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/searchTagByIdButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/searchTagByIdText"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/searchTagByIdText"
+        android:text="@string/search_button" />
+
 </RelativeLayout>

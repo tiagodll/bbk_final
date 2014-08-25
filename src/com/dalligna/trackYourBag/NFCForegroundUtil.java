@@ -1,4 +1,4 @@
-package com.dalligna.nfctracker;
+package com.dalligna.trackYourBag;
 
 import android.app.Activity;
 import android.app.PendingIntent;

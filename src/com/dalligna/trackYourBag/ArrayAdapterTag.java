@@ -1,6 +1,8 @@
-package com.dalligna.nfctracker;
+package com.dalligna.trackYourBag;
 
 import java.util.List;
+
+import com.dalligna.nfctracker.R;
 
 import android.app.Activity;
 import android.app.Application;
@@ -37,7 +39,6 @@ public class ArrayAdapterTag extends ArrayAdapter<Tag> {
 		
 		TextView textViewItem2 = (TextView) convertView.findViewById(R.id.tagText);
 		textViewItem2.setText(tag.ToString());
-		//textViewItem.setTag(objectItem.itemId);
 		return convertView;
 	}
 }

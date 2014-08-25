@@ -1,4 +1,4 @@
-package com.dalligna.nfctracker;
+package com.dalligna.trackYourBag;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 
 public class Util {
-	public boolean checkOnlineState(){
+	static public boolean checkOnlineState(){
 		try {
 			return InetAddress.getByName("http://nfctrackerapp.herokuapp.com").isReachable(1000);
 		} catch (UnknownHostException e) {

@@ -1,4 +1,4 @@
-package com.dalligna.nfctracker;
+package com.dalligna.trackYourBag;
 
 import java.util.Date;
 

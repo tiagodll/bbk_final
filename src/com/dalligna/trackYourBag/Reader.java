@@ -1,4 +1,4 @@
-package com.dalligna.nfctracker;
+package com.dalligna.trackYourBag;
 
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -12,6 +12,8 @@ import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.dalligna.nfctracker.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -50,6 +52,12 @@ public class Reader extends Activity {
 	    nfcForegroundUtil = new NFCForegroundUtil(this);
 	    settings = getSharedPreferences("TrackYourBag", 0);
 	    
+	    Bundle extras = getIntent().getExtras();
+	    if(extras.containsKey("tag")){
+			tag = extras.getString("tag");
+		    setTag(tag);
+	    }
+	    
 	    ((Button)findViewById(R.id.saveButton)).setOnClickListener(new OnClickListener() { 
 	    	@Override
 	        public void onClick(View v) {
@@ -86,9 +94,11 @@ public class Reader extends Activity {
 	public void handleIntent(Intent intent){
 		byte[] extraid = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
 		tag = Util.ByteArrayToHexString(extraid);
-        
-		((TextView)getWindow().findViewById(R.id.theText)).setText(tag);
-		
+        setTag(tag);
+	}
+	
+	public void setTag(String tag){
+		((TextView)getWindow().findViewById(R.id.theText)).setText("ID: " + tag);		
 		if(settings.getString("Persistence", "").equals("Custom"))
 			makeWebRequest(false, null);
 		else
@@ -96,12 +106,15 @@ public class Reader extends Activity {
 	}
 	
 	public void makeHandleRequest(boolean write, View v){
-		ArrayList<String> listContent = new ArrayList<String>();
-		
+		if(!Util.checkOnlineState())
+		{
+			Toast.makeText(getApplicationContext(), "No internet connection detected.", Toast.LENGTH_LONG).show();
+			return;
+		}
+		Context context = getApplicationContext();
 		HandleSystem p = new HandleSystem();
-		List<Tag> list = p.Retrieve(tag);
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, listContent);
+		List<Tag> listContent = p.Retrieve(tag);		
+		ArrayAdapterTag adapter = new ArrayAdapterTag(context, R.layout.listview_tag, listContent);
 		((ListView)getWindow().findViewById(R.id.historyView)).setAdapter(adapter);
 	}
 	
@@ -115,6 +128,11 @@ public class Reader extends Activity {
 	
 	public void makeWebRequest(boolean write, View v)
 	{
+		if(!Util.checkOnlineState())
+		{
+			Toast.makeText(getApplicationContext(), "No internet connection detected.", Toast.LENGTH_LONG).show();
+			return;
+		}
 		GetRemoteString getstring = new GetRemoteString(getApplicationContext(), getWindow().getDecorView());
 		try { getstring.setFinishMethod(Reader.class.getMethod("readNfcsFromWeb", new Class[] {String.class, Context.class, View.class})); } catch (NoSuchMethodException e) { e.printStackTrace(); }
 		getLocation();

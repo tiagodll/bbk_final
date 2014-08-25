@@ -1,4 +1,4 @@
-package com.dalligna.nfctracker;
+package com.dalligna.trackYourBag;
 
 import java.sql.Date;
 import java.text.DateFormat;

@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme" >
         <uses-library android:name="android.test.runner" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.dalligna.trackYourBag.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Reader"
+            android:name="com.dalligna.trackYourBag.Reader"
             android:label="@string/app_name" >
 		    <intent-filter>
 		        <action android:name="android.nfc.action.TECH_DISCOVERED" />

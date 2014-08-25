@@ -1,9 +1,11 @@
-package com.dalligna.nfctracker;
+package com.dalligna.trackYourBag;
 
 import java.io.UnsupportedEncodingException;
 import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.dalligna.nfctracker.R;
 
 import net.handle.hdllib.AbstractMessage;
 import net.handle.hdllib.AbstractResponse;

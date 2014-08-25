@@ -8,5 +8,6 @@
     <string name="settings_text">Choose preferred persistence:</string>
    	<string name="settings_handle_system">Handle System</string>
    	<string name="settings_custom_handle">Custom Storage</string>
+   	<string name="search_button">Search</string>
 
 </resources>

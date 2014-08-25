@@ -1,10 +1,17 @@
-package com.dalligna.nfctracker;
+package com.dalligna.trackYourBag;
+
+import com.dalligna.nfctracker.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -22,6 +29,17 @@ public class MainActivity extends Activity {
 			((RadioGroup)findViewById(R.id.settings_persistence)).check(R.id.settings_custom_handle);
 		else
 			((RadioGroup)findViewById(R.id.settings_persistence)).check(R.id.settings_handle_system);
+		
+		((Button)findViewById(R.id.searchTagByIdButton)).setOnClickListener(new OnClickListener() { 
+	    	@Override
+	        public void onClick(View v) {
+	    		Context context = getApplicationContext();
+	    		Intent intent = new Intent(context, Reader.class);
+		        intent.putExtra("tag", ((EditText)findViewById(R.id.searchTagByIdText)).getText());
+		        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+	   			context.startActivity(intent);
+	    	}
+	    });
 	}
 
 	@Override
