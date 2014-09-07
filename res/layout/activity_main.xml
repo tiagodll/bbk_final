@@ -13,42 +13,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
-    
-    
 
-    <TextView
-        android:id="@+id/textView2"
+    <RadioGroup
+        android:id="@+id/settings_persistence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="28dp"
-        android:text="@string/settings_text" />
-    
-    <RadioGroup
-        android:id="@+id/settings_persistence"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-	
-    <RadioButton
-        android:id="@+id/settings_handle_system"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:onClick="setPersistence"
-        android:checked="false"
-        android:text="@string/settings_handle_system" />
+        android:layout_below="@+id/textView1" >
 
-    <RadioButton
-        android:id="@+id/settings_custom_handle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="setPersistence"
-        android:checked="false"
-        android:text="@string/settings_custom_handle" />
-    
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/settings_text" />
+
+        <RadioButton
+            android:id="@+id/settings_handle_system"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:checked="false"
+            android:onClick="setPersistence"
+            android:text="@string/settings_handle_system" />
+
+        <RadioButton
+            android:id="@+id/settings_custom_handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:onClick="setPersistence"
+            android:text="@string/settings_custom_handle" />
     </RadioGroup>
 
     <EditText
@@ -58,8 +53,6 @@
         android:layout_below="@+id/settings_persistence"
         android:ems="10"
         android:inputType="text" >
-
-        <requestFocus />
     </EditText>
 
     <Button
@@ -70,5 +63,24 @@
         android:layout_marginLeft="8dp"
         android:layout_toRightOf="@+id/searchTagByIdText"
         android:text="@string/search_button" />
+
+    <Button
+        android:id="@+id/close_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="7dp"
+        android:text="@string/close_button" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/searchTagByIdText"
+        android:layout_below="@+id/searchTagByIdText"
+        android:layout_marginTop="27dp"
+        android:text="@string/disclaimer" />
 
 </RelativeLayout>

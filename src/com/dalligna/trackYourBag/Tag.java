@@ -6,17 +6,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Tag {
-	public int handle_id, timestamp;
+	public int handle_id;
+	public long timestamp;
 	public String handle, latitude, longitude, comment;
 	
 	public Tag(){}
-	public Tag(String handle, int handle_id, int timestamp, String data){
+	public Tag(String handle, int handle_id, long timestamp, String data){
 		this.handle_id = handle_id;
 		this.handle = handle;
 		this.timestamp = timestamp;
 		FromJson(data); 
 	}
-	public Tag(String handle, int handle_id, int timestamp, String latitude, String longitude, String comment){
+	public Tag(String handle, int handle_id, long timestamp, String latitude, String longitude, String comment){
 		this.handle_id = handle_id;
 		this.handle = handle;
 		this.timestamp = timestamp;

@@ -1,6 +1,6 @@
 package com.dalligna.trackYourBag;
 
-import com.dalligna.nfctracker.R;
+import com.dalligna.trackYourBag.R;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -34,10 +34,24 @@ public class MainActivity extends Activity {
 	    	@Override
 	        public void onClick(View v) {
 	    		Context context = getApplicationContext();
-	    		Intent intent = new Intent(context, Reader.class);
-		        intent.putExtra("tag", ((EditText)findViewById(R.id.searchTagByIdText)).getText());
-		        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-	   			context.startActivity(intent);
+	    		String tagid = ((EditText)findViewById(R.id.searchTagByIdText)).getText().toString();
+	    		if(tagid.equals("")){
+	    			Toast.makeText(context, "Please insert a tag id to search", Toast.LENGTH_SHORT).show();
+	    		}else{
+		    		Intent intent = new Intent(MainActivity.this, Reader.class);
+			        intent.putExtra("tag", tagid);
+			        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		   			context.startActivity(intent);
+		   			finish();
+	    		}
+	    	}
+	    });
+		
+		((Button)findViewById(R.id.close_button)).setOnClickListener(new OnClickListener() { 
+	    	@Override
+	        public void onClick(View v) {
+	    		finish();
+	            System.exit(0);
 	    	}
 	    });
 	}

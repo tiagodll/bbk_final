@@ -6,8 +6,10 @@
     <string name="hello_world">NFC Tracker app. </string>
    	<string name="tag_info">Loading NFC tag information.</string>
     <string name="settings_text">Choose preferred persistence:</string>
-   	<string name="settings_handle_system">Handle System</string>
+   	<string name="settings_handle_system">Handle System (experimental)</string>
    	<string name="settings_custom_handle">Custom Storage</string>
    	<string name="search_button">Search</string>
+   	<string name="disclaimer">This application doesnt need to be running to scan your nfc tag. Just close the application and select \'Track your Bag\' as the handler when prompted after scanning a tag.</string>
+   	<string name="close_button">Close</string>
 
 </resources>

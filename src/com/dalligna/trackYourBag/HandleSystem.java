@@ -5,7 +5,7 @@ import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dalligna.nfctracker.R;
+import com.dalligna.trackYourBag.R;
 
 import net.handle.hdllib.AbstractMessage;
 import net.handle.hdllib.AbstractResponse;

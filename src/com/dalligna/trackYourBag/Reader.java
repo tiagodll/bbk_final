@@ -1,19 +1,12 @@
 package com.dalligna.trackYourBag;
 
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.dalligna.nfctracker.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,16 +16,10 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
-import android.nfc.NdefMessage;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -52,12 +39,6 @@ public class Reader extends Activity {
 	    nfcForegroundUtil = new NFCForegroundUtil(this);
 	    settings = getSharedPreferences("TrackYourBag", 0);
 	    
-	    Bundle extras = getIntent().getExtras();
-	    if(extras.containsKey("tag")){
-			tag = extras.getString("tag");
-		    setTag(tag);
-	    }
-	    
 	    ((Button)findViewById(R.id.saveButton)).setOnClickListener(new OnClickListener() { 
 	    	@Override
 	        public void onClick(View v) {
@@ -67,6 +48,17 @@ public class Reader extends Activity {
 	    			makeHandleRequest(true, v);
 	    	}
 	    });
+	    
+	    Intent intent = getIntent();
+	    String tag = intent.getStringExtra("tag");
+	    if(tag != null && !tag.equals(""))
+	    	setTag(tag);
+	    
+	    /*Bundle extras = getIntent().getExtras();
+	    if(extras.containsKey("tag")){
+			tag = extras.getString("tag");
+		    setTag(tag);
+	    }//*/
 	}
 
 	public void onPause() {
@@ -154,7 +146,6 @@ public class Reader extends Activity {
 		try {
 			json = new JSONObject(urlcontent);
 			strtag += "ID: " + json.get("id");
-			strtag += ", type: " + json.get("type");
 			((TextView)view.findViewById(R.id.theText)).setText(strtag);
 			
 			ArrayList<Tag> listContent = new ArrayList<Tag>();
@@ -163,7 +154,7 @@ public class Reader extends Activity {
 			for(int i=0; i<history.length(); i++)
 			{
 				JSONObject h = history.getJSONObject(i);
-				listContent.add(new Tag(json.getString("id"), 1, h.getInt("time"), h.getString("latitude"), h.getString("longitude"), h.getString("comment")));
+				listContent.add(new Tag(json.getString("id"), 1, h.getLong("time"), h.getString("latitude"), h.getString("longitude"), h.getString("comment")));
 			}
 			
 			ArrayAdapterTag adapter = new ArrayAdapterTag(context, R.layout.listview_tag, listContent);

@@ -1,8 +1,11 @@
 package com.dalligna.trackYourBag;
 
+import java.sql.Date;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
-import com.dalligna.nfctracker.R;
+import com.dalligna.trackYourBag.R;
 import com.google.android.gms.maps.MapFragment;
 
 import android.app.Activity;
@@ -44,24 +47,13 @@ public class ArrayAdapterTag extends ArrayAdapter<Tag> {
 
 		Tag tag = data.get(position);
 		
-		TextView textViewItem1 = (TextView) convertView.findViewById(R.id.tagId);
-		textViewItem1.setText("" + tag.handle_id);
+		TextView textViewItem1 = (TextView) convertView.findViewById(R.id.tagText);
+		textViewItem1.setText("" + tag.comment);
 		
-		TextView textViewItem2 = (TextView) convertView.findViewById(R.id.tagText);
-		textViewItem2.setText("" + tag.timestamp);
-		
-		((Button)convertView.findViewById(R.id.mapButton)).setOnClickListener(new OnClickListener() { 
-	    	@Override
-	        public void onClick(View v) {
-	    		Toast.makeText(v.getContext(), "click!", Toast.LENGTH_LONG).show();
-	    		
-	    		Activity act = (Activity)context.getApplicationContext();
-	    		MapDialog dialog = new MapDialog();
-	    		Bundle args = new Bundle();
-	    		dialog.setArguments(args);
-	    		dialog.show(act.getFragmentManager(), "map");
-	    	}
-	    });//*/
+		TextView textViewItem2 = (TextView) convertView.findViewById(R.id.tagId);
+		Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+	    textViewItem2.setText("" + format.format(new Date(tag.timestamp * 1000)) + " -> " + tag.latitude + "/" + tag.longitude);
+	    
 		return convertView;
 	}
 }
