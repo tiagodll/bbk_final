@@ -48,17 +48,6 @@ public class Reader extends Activity {
 	    			makeHandleRequest(true, v);
 	    	}
 	    });
-	    
-	    Intent intent = getIntent();
-	    String tag = intent.getStringExtra("tag");
-	    if(tag != null && !tag.equals(""))
-	    	setTag(tag);
-	    
-	    /*Bundle extras = getIntent().getExtras();
-	    if(extras.containsKey("tag")){
-			tag = extras.getString("tag");
-		    setTag(tag);
-	    }//*/
 	}
 
 	public void onPause() {
@@ -84,9 +73,19 @@ public class Reader extends Activity {
 	}
 	
 	public void handleIntent(Intent intent){
-		byte[] extraid = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
-		tag = Util.ByteArrayToHexString(extraid);
-        setTag(tag);
+		Bundle extras = getIntent().getExtras();
+	    if(extras.containsKey(NfcAdapter.EXTRA_ID)){
+	    	byte[] extraid = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
+			tag = Util.ByteArrayToHexString(extraid);
+	        setTag(tag);
+	        ((Button)findViewById(R.id.saveButton)).setEnabled(true);
+	        ((EditText)findViewById(R.id.txtComment)).setEnabled(true);
+	    }else if(extras.containsKey("tag")){
+			tag = extras.getString("tag");
+		    setTag(tag);
+		    ((Button)findViewById(R.id.saveButton)).setEnabled(false);
+		    ((EditText)findViewById(R.id.txtComment)).setEnabled(false);
+	    }
 	}
 	
 	public void setTag(String tag){
@@ -130,10 +129,15 @@ public class Reader extends Activity {
 		getLocation();
 		String url = "http://nfctrackerapp.herokuapp.com/tag/" + URLEncoder.encode(tag);
 		if(write){
+			EditText comment = (EditText)v.getRootView().findViewById(R.id.txtComment);
 			url += "?type=nfc"
 				+ "&latitude=" + latitude
 				+ "&longitude=" + longitude
-				+ "&comment=" + URLEncoder.encode(((EditText)v.getRootView().findViewById(R.id.txtComment)).getText().toString());
+				+ "&comment=" + URLEncoder.encode(comment.getText().toString());
+			comment.setText("");
+			comment.setEnabled(false);
+			((Button)findViewById(R.id.saveButton)).setEnabled(false);
+			
 		}else{
 			url += "?type=read";
 		}

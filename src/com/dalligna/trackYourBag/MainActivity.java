@@ -1,20 +1,16 @@
 package com.dalligna.trackYourBag;
 
-import com.dalligna.trackYourBag.R;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -25,10 +21,14 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);		
 		SharedPreferences settings = getSharedPreferences("TrackYourBag", 0);
 		
-		if(settings.getString("Persistence", "").equals("Custom"))
+		SharedPreferences.Editor editor = settings.edit();
+	    editor.putString("Persistence", "Custom");
+	    editor.commit();
+		
+		/*if(settings.getString("Persistence", "").equals("Custom"))
 			((RadioGroup)findViewById(R.id.settings_persistence)).check(R.id.settings_custom_handle);
 		else
-			((RadioGroup)findViewById(R.id.settings_persistence)).check(R.id.settings_handle_system);
+			((RadioGroup)findViewById(R.id.settings_persistence)).check(R.id.settings_handle_system); //*/
 		
 		((Button)findViewById(R.id.searchTagByIdButton)).setOnClickListener(new OnClickListener() { 
 	    	@Override
@@ -82,4 +82,5 @@ public class MainActivity extends Activity {
 	    editor.putString("Persistence", persistence);
 	    editor.commit();
 	}
+	
 }
