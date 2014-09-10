@@ -5,21 +5,27 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 public class Util {
-	static public boolean checkOnlineState(){
+	static public boolean checkOnlineState(Context context){
 		try {
-			return InetAddress.getByName("http://nfctrackerapp.herokuapp.com").isReachable(1000);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+			if(checkNetwork(context))
+				return InetAddress.getByName("www.google.com").getAddress() != null;
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	static public boolean checkNetwork(Context context){
+		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo ni = cm.getActiveNetworkInfo();
+		return (ni != null);
 	}
 	
 	public String readRawTextFile(Context ctx, int resId)

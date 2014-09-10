@@ -97,11 +97,11 @@ public class Reader extends Activity {
 	}
 	
 	public void makeHandleRequest(boolean write, View v){
-		/*if(!Util.checkOnlineState())
+		if(!Util.checkOnlineState(getApplicationContext()))
 		{
 			Toast.makeText(getApplicationContext(), "No internet connection detected.", Toast.LENGTH_LONG).show();
 			return;
-		}//*/
+		}
 		Context context = getApplicationContext();
 		HandleSystem p = new HandleSystem();
 		List<Tag> listContent = p.Retrieve(tag);		
@@ -119,11 +119,11 @@ public class Reader extends Activity {
 	
 	public void makeWebRequest(boolean write, View v)
 	{
-		/*if(!Util.checkOnlineState())
+		if(!Util.checkOnlineState(getApplicationContext()))
 		{
 			Toast.makeText(getApplicationContext(), "No internet connection detected.", Toast.LENGTH_LONG).show();
 			return;
-		}//*/
+		}
 		GetRemoteString getstring = new GetRemoteString(getApplicationContext(), getWindow().getDecorView());
 		try { getstring.setFinishMethod(Reader.class.getMethod("readNfcsFromWeb", new Class[] {String.class, Context.class, View.class})); } catch (NoSuchMethodException e) { e.printStackTrace(); }
 		getLocation();

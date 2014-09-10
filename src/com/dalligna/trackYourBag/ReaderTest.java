@@ -1,28 +1,16 @@
 package com.dalligna.trackYourBag;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
 
-public class TestReader extends AndroidTestCase {
+public class ReaderTest extends AndroidTestCase {
 	
-	public Persistence _p;
-	public Persistence p(){ 
-		if(_p==null)
-			_p = new HandleSystem();
-		return _p;
-	}
-	
-
-	public void estConnection() {
-		assert(new Util().checkOnlineState());
-	}
-	
-	public void test1CreateHandle() {
+	/*public void test1CreateHandle() {
 		long start = Calendar.getInstance().getTimeInMillis();
 		boolean val = p().Create(getContext(), "test5");
 		
@@ -61,5 +49,5 @@ public class TestReader extends AndroidTestCase {
 		Date d = new Date(stop-start-3600*1000);
 		Log.i("Test", "UpdateHandle total time: " + DateFormat.getTimeInstance().format(d));
 		assert(val);
-	}
+	}*/
 }
