@@ -130,7 +130,7 @@ public class Reader extends Activity {
 		String url = "http://nfctrackerapp.herokuapp.com/tag/" + URLEncoder.encode(tag);
 		if(write){
 			EditText comment = (EditText)v.getRootView().findViewById(R.id.txtComment);
-			url += "?type=nfc"
+			url += "?type=write"
 				+ "&latitude=" + latitude
 				+ "&longitude=" + longitude
 				+ "&comment=" + URLEncoder.encode(comment.getText().toString());

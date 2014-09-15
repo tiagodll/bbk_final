@@ -8,17 +8,12 @@ import java.util.List;
 import android.test.AndroidTestCase;
 import android.util.Log;
 
-public class HandleSystemTester extends AndroidTestCase {
-	public Persistence _p;
-	public Persistence p(){ 
-		if(_p==null)
-			_p = new HandleSystem();
-		return _p;
-	}
+public class HandleSystemTester extends AndroidTestCase {	
+	HandleSystem p = new HandleSystem();
 	
-	/*public void test1CreateHandle() {
+	public void test1CreateHandle() {
 		long start = Calendar.getInstance().getTimeInMillis();
-		boolean val = p().Create(getContext(), "test5");
+		boolean val = p.Create(getContext(), "test5");
 		
 		long stop = Calendar.getInstance().getTimeInMillis();
 		Date d = new Date(stop-start-3600*1000);
@@ -28,7 +23,7 @@ public class HandleSystemTester extends AndroidTestCase {
 	
 	public void test2UpdateHandle() {
 		long start = Calendar.getInstance().getTimeInMillis();
-		boolean val = p().Update(getContext(), new Tag("test5", 5, 
+		boolean val = p.Update(getContext(), new Tag("test5", 5, 
 				(int)(System.currentTimeMillis() / 1000L), 
 				"The test content"));
 		long stop = Calendar.getInstance().getTimeInMillis();
@@ -39,7 +34,7 @@ public class HandleSystemTester extends AndroidTestCase {
 	
 	public void test3RetrieveHandle() {
 		long start = Calendar.getInstance().getTimeInMillis();
-		List<Tag> values = p().Retrieve("test5");
+		List<Tag> values = p.Retrieve("test5");
 		
 		long stop = Calendar.getInstance().getTimeInMillis();
 		Date d = new Date(stop-start-3600*1000);
@@ -49,7 +44,7 @@ public class HandleSystemTester extends AndroidTestCase {
 	
 	public void test4DeleteHandle() {
 		long start = Calendar.getInstance().getTimeInMillis();
-		boolean val = p().Delete(getContext(), "test5");
+		boolean val = p.Delete(getContext(), "test5");
 
 		long stop = Calendar.getInstance().getTimeInMillis();
 		Date d = new Date(stop-start-3600*1000);

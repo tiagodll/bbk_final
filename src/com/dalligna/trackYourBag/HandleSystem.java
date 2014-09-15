@@ -23,7 +23,7 @@ import net.handle.hdllib.ResolutionRequest;
 import net.handle.hdllib.ResolutionResponse;
 import android.content.Context;
 
-public class HandleSystem implements Persistence {
+public class HandleSystem {
 	static final String hdl = "10763";
 	static final String auth_hdl = "0.NA/" + hdl;
 	static final int auth_index = 300;

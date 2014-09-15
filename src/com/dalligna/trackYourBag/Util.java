@@ -15,7 +15,7 @@ public class Util {
 	static public boolean checkOnlineState(Context context){
 		try {
 			if(checkNetwork(context))
-				return InetAddress.getByName("www.google.com").getAddress() != null;
+				return true;//InetAddress.getByName("www.google.com").getAddress() != null;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
